@@ -1,0 +1,653 @@
+/*
+ *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+ */
+
+ body {
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(221, 221, 221);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+  
+  .survey-body {
+    width: 50%;
+    display: flex;
+    /* padding: 25px; */
+    flex-direction: column;
+    gap: 50px;
+  }
+  .container-main {
+    display: grid;
+    flex-direction: column;
+    grid-template-rows: auto;
+  }
+  
+  h2 {
+    transition: opacity 0.5s ease;
+  }
+  
+  .fade {
+    opacity: 0;
+  }
+  
+  .size {
+    /* height: px !important; */
+  }
+  
+  .quesiton-container {
+    width: 100%;
+    display: flex;
+    max-height: 50px;
+    justify-content: center;
+    align-items: center;
+    transition: max-height 5.5s ease;
+  }
+  
+  .section-survey {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .section-question {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    font-family: "Nunito Sans";
+    font-size: 14px;
+    margin: 15px;
+    transition: opacity 0.5s ease;
+  }
+  
+  #num {
+    text-align: center;
+  }
+  
+  #container-video {
+    display: grid;
+    width: 100%;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr;
+    font-family: "Nunito Sans";
+    font-size: 14px;
+  }
+  
+  p {
+    display: block;
+    margin-block-start: 0px !important;
+    margin-block-end: 0px !important;
+    margin-inline-start: 0px !important;
+    margin-inline-end: 0px !important;
+  }
+  
+  .record .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    /* padding: 5px 0; */
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    width: 120px;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+  }
+  
+  .record:hover .tooltiptext {
+    visibility: visible;
+  }
+  
+  .extra-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .time-stamp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .time-stamp-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .time-stamp-survey {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .time-stamp-clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* column-gap: 9px; */
+  }
+  
+  .question {
+    display: flex; /* or inline-flex */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  button:last-of-type {
+    margin: 0;
+  }
+  
+  p.borderBelow {
+    margin: 0 0 20px 0;
+    padding: 0 0 20px 0;
+  }
+  
+  video {
+    object-fit: contain;
+    border-radius: 0px 0px 25px 25px;
+    /* z-index: -999999; */
+    display: block;
+    vertical-align: top;
+    /* --width: 100vw;
+    width: var(--width);
+    height: calc(var(--width) * 0.5625); */
+    width: 100%;
+  
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+    -moz-transform: rotateY(180deg); /* Firefox */
+    /* vertical-align: top;
+    --width: 25vw;
+    width: var(--width);
+    height: calc(var(--width) * 0.5625); */
+    /* width: 75vh;
+    height: 50vh; */
+  }
+  
+  video:last-of-type {
+    margin: 0 0 20px 0;
+  }
+  
+  .btn {
+    text-decoration: none;
+    padding: 15px 40px;
+    background-color: rgb(56, 247, 183);
+    color: #fff;
+    border-radius: 40px;
+    font-weight: bolder;
+    box-shadow: 0 10px 40px;
+  }
+  
+  .video-container {
+    position: relative;
+    display: inline;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56%;
+    border-radius: 0px 0px 25px 25px;
+    background-color: #777;
+  }
+  
+  /* .video-container2 {
+    position: absolute;
+    width: 50vw;
+    border-radius: 25px;
+    background-color: #777;
+  } */
+  
+  .video-display {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .video-display.show {
+    display: none;
+  }
+  
+  .video-tools {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .banner-conatiner {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr 0.5fr;
+  
+    /* justify-content: center;
+    flex-direction: row;
+    gap: 20%; */
+    /* row-gap: 10px; */
+    /* align-items: center; */
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: rgb(73, 73, 73, 0.5);
+    color: #ffffff;
+    width: 100%;
+    height: 40px;
+    top: -40px;
+    z-index: -1;
+    font-weight: normal;
+  }
+  
+  .button-conatiner {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 15px;
+    bottom: 40px !important;
+  }
+  
+  .start-conatiner {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    bottom: 80px;
+  }
+  
+  .start {
+    display: block;
+    border: none;
+    text-align: center;
+    padding: 10px 10px;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 50px;
+    transition: all 0.2s;
+    z-index: 999999;
+    background-color: #fff;
+    color: #777;
+    font-family: "Nunito Sans";
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  .start:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+  }
+  
+  .start.show {
+    display: none;
+  }
+  
+  .record:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+    background-color: rgb(255, 67, 67);
+    border-color: rgb(255, 67, 67);
+  }
+  
+  .record {
+    border-style: solid;
+    cursor: pointer;
+    border-color: #fff;
+    border-width: 1px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50px;
+    transition: all 0.2s;
+    z-index: 999999;
+    background-color: #fff;
+    color: #777;
+    display: none;
+    font-family: "Nunito Sans";
+    font-size: 14px;
+    white-space: nowrap;
+    width: 115px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 5px 2px rgb(48, 48, 48, 0.2);
+    -moz-box-shadow: 0 0 5px 2px rgb(48, 48, 48, 0.2);
+    box-shadow: 0 0 5px 2px rgb(48, 48, 48, 0.2);
+    -webkit-transition: all 0.25s linear;
+    -moz-transition: all 0.25s linear;
+    -o-transition: all 0.25s linear;
+    transition: all 0.25s linear;
+  }
+  
+  .record.show {
+    display: block;
+  }
+  
+  .record.show.red {
+    transition: (1s);
+    background-color: rgb(255, 67, 67);
+    border-color: rgb(255, 67, 67);
+    color: rgb(36, 36, 36);
+    height: 35px;
+    width: 35px;
+    border-radius: 25%;
+  }
+  
+  .button-border {
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-width: 2px;
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 5px 2px rgb(48, 48, 48, 0.2);
+    -moz-box-shadow: 0 0 5px 2px rgb(48, 48, 48, 0.2);
+    box-shadow: 0 0 5px 2px rgb(48, 48, 48, 0.2);
+    display: none;
+  }
+  
+  .button-border.show {
+    display: flex;
+  }
+  
+  #upload {
+    border: none;
+    text-align: center;
+    padding: 10px 10px;
+    display: block;
+    border-radius: 50px;
+    transition: all 0.2s;
+    z-index: 999999;
+    background-color: #fff;
+    color: #777;
+    font-family: "Nunito Sans";
+    font-size: 14px;
+    margin: 25px;
+    white-space: nowrap;
+  }
+  
+  .record[disabled] {
+    pointer-events: none;
+    color: #dddddd;
+  }
+  
+  #upload[disabled] {
+    pointer-events: none;
+    color: #dddddd;
+  }
+  
+  #upload:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+  }
+  
+  .outer-video-container {
+    display: flex;
+    width: 100%;
+    /* transform: translate(0, -50%); */
+  }
+  
+  .next {
+    display: none;
+    border: none;
+    text-align: center;
+    /* padding: 15px 30px; */
+    border-radius: 50px;
+    padding: 15px 5px;
+    transition: all 0.2s;
+    z-index: 999999;
+    background-color: #fff;
+    color: #777;
+    font-family: "Nunito Sans";
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  .next.end {
+    background-color: aqua;
+  }
+  
+  .next:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+  }
+  
+  .next.show {
+    display: block;
+  }
+  
+  #timer {
+    color: #fff;
+    font-size: 100px;
+    display: none;
+  }
+  
+  .instruction-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+  }
+  
+  .written-instructions {
+    display: block;
+    text-align: center;
+    color: #dddddd;
+  }
+  
+  .permissions {
+    display: block;
+    width: 100%;
+  }
+  
+  .spinner {
+    display: none;
+    width: 125px;
+  }
+  
+  .spinner.show {
+    display: block;
+  }
+  
+  .permissions.show {
+    display: none;
+  }
+  .written-instructions.show {
+    display: none;
+  }
+  .instruction-box.show {
+    display: none;
+  }
+  
+  .loading-items {
+    transform: translate(-50%, -50%);
+    top: 47%;
+    left: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .results-window {
+    display: none;
+    color: #dddddd;
+    width: 80%;
+    font-family: "Nunito Sans";
+    font-size: 14px;
+  }
+  
+  .results-window.show {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .logo {
+    width: 125px;
+  }
+  
+  .countdown-container {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    top: 45%; /* position the top  edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+    transform: translate(-50%, -50%);
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .survey-body {
+      width: 100%;
+    }
+  
+    .logo {
+      display: none;
+      width: 75px;
+      padding-left: 5px;
+    }
+  
+    .banner-conatiner {
+      font-size: 12px;
+    }
+  
+      .time-stamp-clock {
+      font-size: 14px;
+    }
+  
+    .written-instructions {
+      font-size: 11px;
+    }
+    .permissions {
+      display: none;
+    }
+  
+    .countdown-container {
+      top: 35%;
+  }
+  
+  video {
+  
+    --width: 100%;
+    width: var(--width);
+    height: calc(var(--width) * 0.7625);
+  }
+  
+  .video-container {
+    /* position: relative;
+    display: inline; */
+    width: 80%;
+    height: 170px;
+    /* height: 0;
+    padding-bottom: 56%;
+    border-radius: 0px 0px 25px 25px;
+    background-color: #777; */
+  }
+  
+  #container-video {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* gap: 175px; */
+  }
+  
+  .banner-conatiner {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .time-stamp {
+    display: none;
+  }
+  
+  .permissions {
+    display: none; 
+  }
+  
+  }
+  /* @media all and (max-width: 500px) {
+    .button-conatiner {
+      bottom: 8px;
+    }
+  
+    .banner-conatiner {
+      font-size: 10px;
+      padding-top: 4px;
+    }
+    .start {
+      padding: 12px 4px;
+    }
+  
+    .record {
+      font-size: 10px;
+      padding: 12px 4px;
+    }
+  
+    #upload {
+      font-size: 10px;
+      padding: 12px 12px;
+    }
+  
+    #timer {
+      font-size: 65px;
+    }
+  
+    #next {
+      font-size: 10px;
+      padding: 12px 12px;
+    }
+  
+    .results-window {
+      font-size: 10px;
+    }
+  } */
+  
+  /* @media all and (max-width: 1050px) {
+    .button-conatiner {
+      bottom: 15px;
+    }
+    .video-container {
+      width: 90vw;
+    }
+  }
+  
+  video:last-of-type {
+    margin: 0 0 0px 0 !important;
+  } */
+  
+  /* 
+  -------------------------------------------------- */
+  
+  
+  
+  
+  /*# sourceMappingURL=/main.af46ece4.css.map */
