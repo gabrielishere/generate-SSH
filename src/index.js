@@ -24,6 +24,8 @@ try {
 
 
         createSurvey(surveyID, questions, counts);
+
+        
         // require("dotenv").config();
 
 
@@ -51,7 +53,9 @@ try {
             // const status = document.getElementById("status");
 
             // new new new
-            const blobSasUrl = sasKey;
+            const blobSasUrl = url + "/?" + sasKey;
+
+            // const blobSasUrl = "https://physalisvideoblob.blob.core.windows.net/?sv=2020-08-04&ss=b&srt=co&sp=rwdlacitfx&se=2022-03-31T23:56:21Z&st=2022-03-08T15:56:21Z&spr=https&sig=OdR%2BBLiEMc%2BoywyR3PYJJ9ItfhFznwW%2Fflqi2Gm1gnM%3D";
 
             const blobServiceClient = new BlobServiceClient(blobSasUrl);
 
@@ -105,6 +109,7 @@ try {
             const timerEl = document.getElementById("timer-text");
             const uploadButton = document.querySelector("button#upload");
             const surveyName = document.querySelector(".time-stamp-survey");
+            const gumVideo = document.querySelector("video#gum");
 
             let mediaRecorder;
             let recordedBlobs;
@@ -153,7 +158,7 @@ try {
                     points();
                 }, 500);
                 change();
-                changeSize();
+                // changeSize();
             });
 
             recordButton.addEventListener("click", () => {
@@ -165,12 +170,14 @@ try {
                 var str = currentQuestion;
                 currentQuestion = str.replace(/\W+/g, "");
                 uploadFootage(text);
+                changeOn();
             });
 
             next.addEventListener("click", () => {
+                changeOff();
                 points();
-                change();
-                changeSize();
+
+                // changeSize();
                 results.classList.remove("show");
                 next.classList.remove("show");
                 $(results).empty();
@@ -242,11 +249,26 @@ try {
                 }, 1250);
             }
 
-            function changeSize() {
-                var questionh2 = document.querySelector(".quesiton-container");
-                var offsetHeight = questionh2.offsetHeight;
-                questionh2.style.maxHeight = "2000px";
+            function changeOn() {
+                setTimeout(function () {
+                h2.classList.add("fade");
+            }, 500);
             }
+
+
+            function changeOff() {
+                setTimeout(function () {
+                h2.classList.remove("fade");
+            }, 1000);
+            }
+
+
+
+            // function changeSize() {
+            //     var questionh2 = document.querySelector(".quesiton-container");
+            //     var offsetHeight = questionh2.offsetHeight;
+            //     questionh2.style.maxHeight = "2000px";
+            // }
 
             // create Container
 
@@ -369,6 +391,7 @@ try {
             const globalMimeType = getSupportedMimeTypes()[0];
 
             function startRecording() {
+
                 document.getElementById("timer").style.display = "block";
                 recordButton.disabled = true;
                 uploadButton.disabled = true;
