@@ -1,0 +1,7 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=physalisvideoblob;AccountKey=IxX8JEChXBpyEy8uhvWbyWjx5XJhchlkicoOnfBBNhPF+XDREuLyH7cR+Bd1WgwjY/FpwmK580Gwewxn30Riqw==;EndpointSuffix=core.windows.net"
+  }
+}
